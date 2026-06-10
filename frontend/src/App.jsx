@@ -1,11 +1,15 @@
-
+import {BrowserRouter as Router, Routes} from 'react-router-dom'
+import Navbar from './components/Navbar'
 
 function App() {
   
-
   return (
+    <Router>
+      <Navbar/>
+
+    </Router>
     
-      <div><h1>ResolveIt</h1></div>
+      
   )
 }
 
