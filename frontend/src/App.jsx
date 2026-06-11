@@ -17,7 +17,7 @@ function App() {
     <Router>
       <div
         className="d-flex flex-column min-vh-100"
-        style={{ backgroundColor: "var(--bg-primary)" }}
+        style={{ backgroundColor: '#000026' }}
       >
         <Navbar />
         <div>

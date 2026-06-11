@@ -2,7 +2,7 @@ import React from 'react'
 
 const AdminActiveComplaints = () => {
   return (
-    <div>AdminActiveComplaints</div>
+    <div><h1>AdminActiveComplaints</h1></div>
   )
 }
 
