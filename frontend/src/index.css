@@ -7,6 +7,8 @@
   transition: var(--transition-smooth);
 
 }
-.h1{
-  color: aliceblue;
+.glass-panel {
+  background: rgb(13, 3, 53);
+  box-shadow: var(--card-shadow);
+  border-radius: 20px;
 }
