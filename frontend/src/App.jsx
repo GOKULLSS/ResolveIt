@@ -26,60 +26,80 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/unauthorized" element={<Unauthorized />} />
 
+            {/* <Route
+              path="/student-dashboard"
+              element={
+                
+                  <StudentDashboard />
+                  <ProtectedRoute allowedRoles={["Student"]}>
+                  <StudentDashboard />
+                </ProtectedRoute>
+                
+              }
+            /> */}
+
             <Route
               path="/student-dashboard"
               element={
-                <ProtectedRoute allowedRoles={["Student"]}>
+                
                   <StudentDashboard />
-                </ProtectedRoute>
+                
               }
             />
             <Route
               path="/submit-complaint"
               element={
-                <ProtectedRoute allowedRoles={["Student"]}>
+                
                   <StudentSubmit />
-                </ProtectedRoute>
+                
               }
             />
             <Route
               path="/edit-complaint/:id"
               element={
-                <ProtectedRoute allowedRoles={["Student"]}>
+                
                   <StudentSubmit />
-                </ProtectedRoute>
+              
               }
             />
             <Route
               path="/view-complaints"
               element={
-                <ProtectedRoute allowedRoles={["Student"]}>
+                
                   <StudentViewComplaints />
-                </ProtectedRoute>
+                
               }
             />
             <Route
               path="/complaint-status"
               element={
-                <ProtectedRoute allowedRoles={["Student"]}>
+                
                   <StudentTrackComplaints />
-                </ProtectedRoute>
+                
               }
             />
-            <Route
+            {/* <Route
               path="/admin-dashboard"
               element={
                 <ProtectedRoute allowedRoles={["Admin"]}>
                   <AdminDashboard />
                 </ProtectedRoute>
               }
+            /> */}
+            <Route
+              path="/admin-dashboard"
+              element={
+                
+                  <AdminDashboard />
+                
+              }
             />
             <Route
               path="/active-complaints"
               element={
-                <ProtectedRoute allowedRoles={["Admin"]}>
+                
                   <AdminActiveComplaints />
-                </ProtectedRoute>
+                
               }
             />
           </Routes>
