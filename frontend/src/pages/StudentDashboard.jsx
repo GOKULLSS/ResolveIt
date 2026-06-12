@@ -18,92 +18,70 @@ const StudentDashboard = () => {
     category: "Classroom",
     status: "Pending"
   },
+ 
   {
     id: 2,
-    title: "Broken classroom chair",
-    category: "Classroom",
-    status: "Resolved"
-  },
-  {
-    id: 3,
-    title: "Computer system failure",
-    category: "Laboratory",
-    status: "Pending"
-  },
-  {
-    id: 4,
     title: "AC not working in lab",
     category: "Laboratory",
     status: "In Progress"
   },
   {
-    id: 5,
+    id: 3,
     title: "Water leakage in hostel",
     category: "Hostel",
     status: "Pending"
   },
   {
-    id: 6,
+    id: 4,
     title: "Hostel room light issue",
     category: "Hostel",
     status: "Resolved"
   },
+
   {
-    id: 7,
-    title: "Books not available",
-    category: "Library",
-    status: "Pending"
-  },
-  {
-    id: 8,
-    title: "Library fan not working",
-    category: "Library",
-    status: "Resolved"
-  },
-  {
-    id: 9,
+    id: 5,
     title: "Slow Wi-Fi connection",
     category: "Internet/Wi-Fi",
     status: "In Progress"
   },
   {
-    id: 10,
+    id: 6,
     title: "No internet in block A",
     category: "Internet/Wi-Fi",
     status: "Pending"
   },
   {
-    id: 11,
+    id: 7,
     title: "Power outage in corridor",
     category: "Electrical",
     status: "Pending"
   },
   {
-    id: 12,
+    id: 8,
     title: "Switch board damaged",
     category: "Electrical",
     status: "Resolved"
   },
   {
-    id: 13,
-    title: "No water in washroom",
-    category: "Water Supply",
+    id: 9,
+    title: "Power outage in corridor",
+    category: "Electrical",
     status: "Pending"
   },
   {
-    id: 14,
+    id: 10,
+    title: "Switch board damaged",
+    category: "Electrical",
+    status: "Resolved"
+  },
+  {
+    id: 11,
     title: "Dirty classroom",
     category: "Cleanliness",
     status: "In Progress"
   },
   {
-    id: 15,
-    title: "Garbage not cleaned",
-    category: "Cleanliness",
-    status: "Pending"
-  },
-  {
-    id: 16,
+    id: 12,
     title: "Miscellaneous complaint",
     category: "Other",
     status: "Pending"

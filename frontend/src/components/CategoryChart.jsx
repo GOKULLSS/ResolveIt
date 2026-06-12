@@ -91,6 +91,9 @@ const CategoryChart = ({complaints}) => {
                       borderRadius:'4px',
                       transition: 'width 1s cubic-bezier(0.4, 0, 0.2, 1)'
                      }}
+                      aria-valuenow={count}
+                      aria-valuemin="0"
+                      aria-valuemax={maxCount}
                     >
 
                     </div>
