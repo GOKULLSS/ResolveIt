@@ -173,7 +173,7 @@ const AdminActiveComplaints = () => {
               <h5 className="card-title fw-bold mb-4 d-flex align-items-center justify-content-between">
                 <div className="d-flex align-items-center">
                   <i className="bi bi-table text-primary me-2"></i>
-                  <span>Complaints Registry</span>
+                  <span className='text-primary'>Complaints Registry</span>
                 </div>
                 <span className="badge bg-primary bg-opacity-10 text-primary border border-primary border-opacity-10 px-3 py-1 fs-6">
                   {displayedComplaints.length} matched
@@ -184,14 +184,14 @@ const AdminActiveComplaints = () => {
               <div className="row g-2 mb-4">
                 {/* Category filter */}
                 <div className="col-6 col-md-3">
-                  <label className="text-secondary small fw-medium mb-1">Category</label>
+                  <label className="text-white small fw-medium mb-1">Category</label>
                   <select
-                    className="form-select custom-input py-2"
+                    className="form-select custom-input  py-2"
                     style={{ fontSize: '0.85rem' }}
                     value={filterCategory}
                     onChange={(e) => setFilterCategory(e.target.value)}
                   >
-                    <option value="">All Categories</option>
+                    <option value="" >All Categories</option>
                     {categoriesList.map(cat => (
                       <option key={cat} value={cat}>{cat}</option>
                     ))}
@@ -200,7 +200,7 @@ const AdminActiveComplaints = () => {
 
                 {/* Status filter */}
                 <div className="col-6 col-md-3">
-                  <label className="text-secondary small fw-medium mb-1">Status</label>
+                  <label className="text-white small fw-medium mb-1">Status</label>
                   <select
                     className="form-select custom-input py-2"
                     style={{ fontSize: '0.85rem' }}
@@ -216,7 +216,7 @@ const AdminActiveComplaints = () => {
 
                 {/* Date Filter */}
                 <div className="col-6 col-md-3">
-                  <label className="text-secondary small fw-medium mb-1">Date Raised</label>
+                  <label className="text-white small fw-medium mb-1">Date Raised</label>
                   <input
                     type="date"
                     className="form-control custom-input py-2"
@@ -228,7 +228,7 @@ const AdminActiveComplaints = () => {
 
                 {/* Sort Order filter */}
                 <div className="col-6 col-md-3">
-                  <label className="text-secondary small fw-medium mb-1">Sort By</label>
+                  <label className="text-white small fw-medium mb-1">Sort By</label>
                   <select
                     className="form-select custom-input py-2"
                     style={{ fontSize: '0.85rem' }}
@@ -256,7 +256,7 @@ const AdminActiveComplaints = () => {
                 ) : (
                   <table className="table custom-table">
                     <thead>
-                      <tr>
+                      <tr className='text-white'>
                         <th>Subject</th>
                         <th>Student</th>
                         <th>Status</th>
@@ -267,8 +267,8 @@ const AdminActiveComplaints = () => {
                       {displayedComplaints.map(complaint => (
                         <tr key={complaint._id}>
                           <td>
-                            <div className="fw-semibold text-dark text-truncate" style={{ maxWidth: '300px' }}>{complaint.title}</div>
-                            <small className="text-muted d-flex align-items-center gap-1 mt-1">
+                            <div className="fw-semibold text-secondary text-truncate" style={{ maxWidth: '300px' }}>{complaint.title}</div>
+                            <small className="text-secondary d-flex align-items-center gap-1 mt-1">
                               <span>{complaint.category}</span>
                               <span>•</span>
                               <span>{complaint.location}</span>
@@ -276,10 +276,10 @@ const AdminActiveComplaints = () => {
                           </td>
                           <td>
                             <div className="text-secondary small">{complaint.createdBy?.name || 'Unknown'}</div>
-                            <div className="text-muted" style={{ fontSize: '0.7rem' }}>{complaint.createdBy?.email}</div>
+                            <div className="text-secondary" style={{ fontSize: '0.7rem' }}>{complaint.createdBy?.email}</div>
                           </td>
                           <td>
-                            <span className={`status-badge ${complaint.status === 'Pending' ? 'pending' : complaint.status === 'In Progress' ? 'inprogress' : 'resolved'}`} style={{ fontSize: '0.65rem' }}>
+                            <span  className={`status-badge text-secondary ${complaint.status === 'Pending' ? 'pending' : complaint.status === 'In Progress' ? 'inprogress' : 'resolved'}`} style={{ fontSize: '0.65rem' }}>
                               {complaint.status}
                             </span>
                           </td>

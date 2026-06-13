@@ -122,7 +122,7 @@ const AdminDashboard = () => {
           <div className="card  glass-panel h-100 p-5 mt-2"style={{ fontSize: '0.8rem', letterSpacing: '0.5px' }}>
             <div className="d-flex align-items-center justify-content-between">
               <div >
-                <h3 className="text-danger fw-semibold text-uppercase mb-3">Total Cases</h3>
+                <h3 className="text-danger fw-semibold text-uppercase mb-3 " style={{fontSize:"1.2rem"}}>Total Cases</h3>
                 <h1 className="text-white">{stats.total}</h1>
               </div>
               <div className="bg-primary bg-opacity-10 text-danger p-3 rounded-4">
