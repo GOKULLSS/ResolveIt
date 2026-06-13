@@ -123,11 +123,11 @@ const StudentTrackComplaints = () => {
               return (
                 <div key={c._id} className="card glass-panel mb-4 p-4">
                   <div className="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-3">
-                    <span className="badge bg-secondary bg-opacity-20 text-light border border-secondary border-opacity-20 d-flex align-items-center gap-2 px-3 py-2" style={{ borderRadius: '8px', fontSize: '0.8rem' }}>
+                    <span className="badge bg-secondary bg-opacity-10 text-light border border-secondary border-opacity-20 d-flex align-items-center gap-2 px-3 py-2" style={{ borderRadius: '8px', fontSize: '0.8rem' }}>
                       <i className={`bi ${iconClass} text-primary`}></i>
                       <span>{c.category}</span>
                     </span>
-                    <span className={`status-badge ${statusDetails.class}`}>
+                    <span className={`status-badge text-white ${statusDetails.class}`}>
                       <span>{statusDetails.label}</span>
                     </span>
                   </div>
@@ -166,7 +166,7 @@ const StudentTrackComplaints = () => {
                         >
                           <i className="bi bi-check-lg fs-6"></i>
                         </div>
-                        <span className="small mt-2 text-center fw-medium text-light" style={{ fontSize: '0.65rem' }}>Submitted</span>
+                        <span className="small mt-4 text-center fw-medium text-light" style={{ fontSize: '0.65rem' }}>Submitted</span>
                       </div>
 
                       {/* Step 2: Under Review / In Progress */}
@@ -199,7 +199,7 @@ const StudentTrackComplaints = () => {
                         >
                           <i className={`bi ${c.status === 'Resolved' ? 'bi-check2-all' : 'bi-circle'} fs-6`}></i>
                         </div>
-                        <span className={`small mt-2 text-center fw-medium ${c.status === 'Resolved' ? 'text-light' : 'text-muted'}`} style={{ fontSize: '0.65rem' }}>Resolved</span>
+                        <span className={`small mt-4 text-center  fw-medium ${c.status === 'Resolved' ? 'text-light' : 'text-muted'}`} style={{ fontSize: '0.65rem' }}>Resolved</span>
                       </div>
                     </div>
 

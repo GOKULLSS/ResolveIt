@@ -90,7 +90,7 @@ const StudentDashboard = () => {
   // Dummy Data End
 
   return (
-    <div className="container py-5 ">
+    <div className="container py-5 fade-in-up ">
       <div className="d-flex justify-content-between align-items-center flex-wrap ">
         <div>
           <h1 className="fw-bold text-light ">StudentDashboard</h1>
