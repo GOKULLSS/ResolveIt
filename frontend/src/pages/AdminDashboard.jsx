@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from "react-router-dom";
+import CategoryChart from '../components/CategoryChart';
 
 
 const AdminDashboard = () => {
@@ -8,11 +9,87 @@ const AdminDashboard = () => {
   // const error="this is dummy error"
   const error = null;
   const stats = {
-    total: 10,
-    pending: 5,
-    inprogress: 3,
-    resolved: 2
+    total: 20,
+    pending: 10,
+    inprogress: 6,
+    resolved: 4
   }
+  const allComplaints = [
+  {
+    id: 1,
+    title: "Projector not working",
+    category: "Classroom",
+    status: "Pending"
+  },
+ 
+  {
+    id: 2,
+    title: "AC not working in lab",
+    category: "Laboratory",
+    status: "In Progress"
+  },
+  {
+    id: 3,
+    title: "Water leakage in hostel",
+    category: "Hostel",
+    status: "Pending"
+  },
+  {
+    id: 4,
+    title: "Hostel room light issue",
+    category: "Hostel",
+    status: "Resolved"
+  },
+
+  {
+    id: 5,
+    title: "Slow Wi-Fi connection",
+    category: "Internet/Wi-Fi",
+    status: "In Progress"
+  },
+  {
+    id: 6,
+    title: "No internet in block A",
+    category: "Internet/Wi-Fi",
+    status: "Pending"
+  },
+  {
+    id: 7,
+    title: "Power outage in corridor",
+    category: "Electrical",
+    status: "Pending"
+  },
+  {
+    id: 8,
+    title: "Switch board damaged",
+    category: "Electrical",
+    status: "Resolved"
+  },
+  {
+    id: 9,
+    title: "Power outage in corridor",
+    category: "Electrical",
+    status: "Pending"
+  },
+  {
+    id: 10,
+    title: "Switch board damaged",
+    category: "Electrical",
+    status: "Resolved"
+  },
+  {
+    id: 11,
+    title: "Dirty classroom",
+    category: "Cleanliness",
+    status: "In Progress"
+  },
+  {
+    id: 12,
+    title: "Miscellaneous complaint",
+    category: "Other",
+    status: "Pending"
+  }
+];
   // Dummy Data End
   return (
     <div className="container py-5 ">
@@ -93,6 +170,9 @@ const AdminDashboard = () => {
             </div>
           </div>
         </div>
+      </div>
+      <div>
+        <CategoryChart complaints={allComplaints}/>
       </div>
     </div>
   )
