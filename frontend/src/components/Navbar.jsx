@@ -4,10 +4,10 @@ import { Link, useNavigate } from "react-router-dom";
 const Navbar = () => {
   //   const { user, logout } = useContext(AuthContext);
 
-  //  const user = {
-  //   name: "Gokul",
-  //    role: "Admin",
-  //  };
+  // const user = {
+   // name: "Gokul",
+   //  role: "Admin",
+  // };
   const user = {
    name: "Gokulzz",
    role: "Student",
