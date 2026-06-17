@@ -5,12 +5,12 @@ const Navbar = () => {
   //   const { user, logout } = useContext(AuthContext);
 
   // const user = {
-  //   name: "Gokul",
+  //  name: "Gokul",
   //   role: "Admin",
   // };
   const user = {
-    name: "Gokulzz",
-    role: "Student",
+   name: "Gokulzz",
+   role: "Student",
   };
   //  const user = null;
 

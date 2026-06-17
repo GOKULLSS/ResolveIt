@@ -7,6 +7,93 @@
   transition: var(--transition-smooth);
 
 }
-.h1{
-  color: aliceblue;
+.glass-panel {
+  background: rgb(13, 3, 53);
+  box-shadow: var(--card-shadow);
+  border-radius: 20px;
+}
+.custom-input {
+  background-color: rgba(7, 7, 47, 0.975) !important;
+  border: 1px solid var(--border-color) !important;
+  color: var(--text-primary) !important;
+  border-radius: 8px !important;
+  padding: 0.75rem 1rem !important;
+  transition: var(--transition-smooth) !important;
+}
+
+ .custom-input:focus {
+  border-color: var(--accent-primary) !important;
+  box-shadow: 0 0 0 3px rgba(102, 102, 98, 0.2) !important;
+  outline: none;
+}
+
+.custom-input::placeholder {
+  color: var(--text-muted) !important;
+} 
+
+
+/* Styled Tables */
+.custom-table {
+  
+  background-color: transparent !important;
+}
+
+.custom-table th {
+  background-color: rgba(3, 3, 84, 0.975) !important;
+  border-bottom: 2px solid var(--border-color) !important;
+  color: var(--text-secondary) !important;
+  font-weight: 600;
+  padding: 1rem !important;
+}
+
+.custom-table td {
+  background-color: rgba(10, 36, 113, 0.2) !important;
+  border-bottom: 1px solid var(--border-color) !important;
+  padding: 1rem !important;
+  vertical-align: middle;
+}
+
+.custom-table tr:hover td {
+  background-color: rgba(11, 51, 116, 0.4) !important;
+}
+/* Status Badges with micro-animations */
+.status-badge {
+  padding: 0.35em 0.8em;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 50rem;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.status-badge.pending {
+  background-color: rgba(240, 155, 8, 0.15);
+  color: var(--status-pending);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  
+}
+
+.status-badge.inprogress {
+  background-color: rgba(6, 182, 212, 0.15);
+  color: var(--status-inprogress);
+  border: 1px solid rgba(6, 182, 212, 0.3);
+}
+
+.status-badge.resolved {
+  background-color: rgba(16, 185, 129, 0.15);
+  color: var(--status-resolved);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in-up {
+  animation: fadeIn 0.4s ease-out forwards;
 }

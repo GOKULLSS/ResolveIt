@@ -110,7 +110,7 @@ function App() {
           style={{ borderColor: "var(--border-color)", fontSize: "0.8rem" }}
         >
           <div className="container">
-            <span>
+            <span className="text-secondary">
               &copy; {new Date().getFullYear()} Campus Complaint Management
               System. All rights reserved.
             </span>
