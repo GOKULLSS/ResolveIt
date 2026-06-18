@@ -1,11 +1,31 @@
-//create
+import Complaint from '../models/Complaint.js';
 
+//@desc Create a new complaint
+//@route POST /api/complaints
+//@access Private (Students only)
+export const createComplaint = async (req, res) => {
+  try {
+    const { title, category, description, location } = req.body;
 
+    if(!title || !category || !description || !location) {
+      return res.status(400).json({ message: 'Please provide title, category, description, and location' });
+    }
 
-
-
-
-
+    const compiant = await Compliant.create({
+      title,
+      category,
+      description,
+      location,
+      creditedBy: req.user._id,
+      status: 'Pending',
+    });
+  
+  return res.status(201).json(complaint);
+} catch (error) {
+  console.error('Create Complaint Error:', error.message);
+  return res.status(500).json({ message: 'Server error creating complaint'});
+}
+};
 
 // @desc    Get complaints (Student gets their own, Admin gets all)
 // @route   GET /api/complaints
