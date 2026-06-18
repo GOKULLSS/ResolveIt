@@ -132,6 +132,14 @@ const ComplaintCard = ({ complaint, onDelete }) => {
                   <i className="bi bi-pencil-square me-1"></i>
                   Edit
                 </button>
+                 {/* <Link
+                  to={`/edit-complaint/${_id}`}
+                  className="btn btn-outline-primary btn-sm d-flex align-items-center gap-1 px-3 py-2"
+                  style={{ borderRadius: '8px' }}
+                >
+                  <i className="bi bi-pencil-square"></i>
+                  <span>Edit</span>
+                </Link> */}
 
                 <button
                   onClick={() =>
