@@ -1,93 +1,39 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import CategoryChart from "../components/CategoryChart";
+import AuthContext from "../context/AuthContext";
+import axios from "axios";
 
 const StudentDashboard = () => {
-  // Dummy Data Start
-  const user = {
-    name: "Gokul",
-  };
-  // const error="this is dummy error"
-  const error = null;
-  const stats = { total: 3, pending: 2, resolved: 1 };
-  //Complaints dummy data
-  const complaints = [
-  {
-    id: 1,
-    title: "Projector not working",
-    category: "Classroom",
-    status: "Pending"
-  },
- 
-  {
-    id: 2,
-    title: "AC not working in lab",
-    category: "Laboratory",
-    status: "In Progress"
-  },
-  {
-    id: 3,
-    title: "Water leakage in hostel",
-    category: "Hostel",
-    status: "Pending"
-  },
-  {
-    id: 4,
-    title: "Hostel room light issue",
-    category: "Hostel",
-    status: "Resolved"
-  },
+  const { user } = useContext(AuthContext);
+  const [complaints, setComplaints] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+  const [stats, setStats] = useState({ total: 0, pending: 0, resolved: 0 });
 
-  {
-    id: 5,
-    title: "Slow Wi-Fi connection",
-    category: "Internet/Wi-Fi",
-    status: "In Progress"
-  },
-  {
-    id: 6,
-    title: "No internet in block A",
-    category: "Internet/Wi-Fi",
-    status: "Pending"
-  },
-  {
-    id: 7,
-    title: "Power outage in corridor",
-    category: "Electrical",
-    status: "Pending"
-  },
-  {
-    id: 8,
-    title: "Switch board damaged",
-    category: "Electrical",
-    status: "Resolved"
-  },
-  {
-    id: 9,
-    title: "Power outage in corridor",
-    category: "Electrical",
-    status: "Pending"
-  },
-  {
-    id: 10,
-    title: "Switch board damaged",
-    category: "Electrical",
-    status: "Resolved"
-  },
-  {
-    id: 11,
-    title: "Dirty classroom",
-    category: "Cleanliness",
-    status: "In Progress"
-  },
-  {
-    id: 12,
-    title: "Miscellaneous complaint",
-    category: "Other",
-    status: "Pending"
-  }
-];
-  // Dummy Data End
+  const calculateStats = (data) => {
+    const total = data.length;
+    const pending = data.filter((c) => c.status === 'Pending').length;
+    const resolved = data.filter((c) => c.status === 'Resolved').length;
+    setStats({ total, pending, resolved });
+  };
+
+   useEffect(() => {
+    const fetchComplaints = async () => {
+      try {
+        const res = await axios.get('/api/complaints');
+        setComplaints(res.data);
+        calculateStats(res.data);
+      } catch (err) {
+        console.error('Error fetching complaints:', err);
+        setError('Could not retrieve complaints list. Please try again.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchComplaints();
+  }, []);
 
   return (
     <div className="container py-5 fade-in-up ">

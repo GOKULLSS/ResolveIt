@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const categoryIcons = {
   Classroom: 'bi-chalkboard-fill',
   Laboratory: 'bi-cpu-fill',
@@ -121,25 +123,15 @@ const ComplaintCard = ({ complaint, onDelete }) => {
 
             {isPending ? (
               <>
-                <button
-                  className="btn btn-outline-primary btn-sm"
-                  onClick={() =>
-                    alert(
-                      'Frontend Demo Edit Page'
-                    )
-                  }
-                >
-                  <i className="bi bi-pencil-square me-1"></i>
-                  Edit
-                </button>
-                 {/* <Link
+              
+                 <Link
                   to={`/edit-complaint/${_id}`}
                   className="btn btn-outline-primary btn-sm d-flex align-items-center gap-1 px-3 py-2"
                   style={{ borderRadius: '8px' }}
                 >
                   <i className="bi bi-pencil-square"></i>
                   <span>Edit</span>
-                </Link> */}
+                </Link>
 
                 <button
                   onClick={() =>
