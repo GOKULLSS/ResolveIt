@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 const categories = [
   'Classroom',
@@ -12,6 +13,7 @@ const categories = [
   'Cleanliness',
   'Other'
 ];
+
 const categoryIcons = {
   'Classroom': 'bi-chalkboard-fill',
   'Laboratory': 'bi-cpu-fill',
@@ -25,42 +27,33 @@ const categoryIcons = {
 };
 
 const StudentTrackComplaints = () => {
-  const [complaints] = useState([
-  {
-    _id: "CMP001",
-    title: "Fan Not Working",
-    description: "Fan in classroom is damaged",
-    category: "Classroom",
-    status: "Pending",
-    location: "Room 101",
-    createdDate: "2026-06-12"
-  },
-  {
-    _id: "CMP002",
-    title: "WiFi Issue",
-    description: "Internet is slow",
-    category: "Internet/Wi-Fi",
-    status: "In Progress",
-    location: "Library",
-    createdDate: "2026-06-10"
-  },
-  {
-    _id: "CMP003",
-    title: "Water Leakage",
-    description: "Leakage in hostel bathroom",
-    category: "Hostel",
-    status: "Resolved",
-    location: "Hostel A",
-    createdDate: "2026-06-08"
-  }
-]);
+  const [complaints, setComplaints] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
 
   // Search & Filter State
   const [searchTerm, setSearchTerm] = useState('');
   const [categoryFilter, setCategoryFilter] = useState('');
   const [statusFilter, setStatusFilter] = useState('');
 
-   const filteredComplaints = complaints.filter((c) => {
+  useEffect(() => {
+    const fetchComplaints = async () => {
+      try {
+        const res = await axios.get('/api/complaints');
+        setComplaints(res.data);
+      } catch (err) {
+        console.error('Error fetching complaints:', err);
+        setError('Could not retrieve complaints status. Please try again.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchComplaints();
+  }, []);
+
+  // Filter complaints
+  const filteredComplaints = complaints.filter((c) => {
     const matchesSearch = 
       c.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
       c.description.toLowerCase().includes(searchTerm.toLowerCase());
@@ -76,7 +69,19 @@ const StudentTrackComplaints = () => {
 
   return (
     <div className="container py-4">
-    <div className="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4 fade-in-up">
+      {/* Spin Animation Styles injection */}
+      <style>{`
+        @keyframes local-spin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+        .local-spin-animation {
+          animation: local-spin 2s linear infinite;
+        }
+      `}</style>
+
+      {/* Header Panel */}
+      <div className="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4 fade-in-up">
         <div>
           <h2 className="fw-bold text-light mb-1">Complaint Tracking & Status</h2>
           <p className="text-secondary mb-0">Follow real-time updates and lifecycle tracking of your grievances.</p>
@@ -87,12 +92,79 @@ const StudentTrackComplaints = () => {
         </Link>
       </div>
 
+      {error && (
+        <div className="alert alert-danger bg-danger bg-opacity-10 text-danger border-0 d-flex align-items-center gap-2 mb-4" role="alert" style={{ borderRadius: '8px' }}>
+          <i className="bi bi-exclamation-triangle-fill"></i>
+          <div>{error}</div>
+        </div>
+      )}
+
+      {/* Search & Filters Controls */}
+      <div className="card glass-panel mb-4 p-4 fade-in-up">
+        <div className="row g-3">
+          {/* Search bar */}
+          <div className="col-12 col-lg-6">
+            <label className="form-label text-secondary small fw-medium">Search Complaints</label>
+            <div className="input-group">
+              <span className="input-group-text custom-input border-end-0 bg-transparent text-secondary">
+                <i className="bi bi-search"></i>
+              </span>
+              <input
+                type="text"
+                className="form-control custom-input border-start-0 ps-0"
+                placeholder="Search by title or description..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+            </div>
+          </div>
+
+          {/* Category Filter */}
+          <div className="col-6 col-lg-3">
+            <label className="form-label text-secondary small fw-medium">Category</label>
+            <select
+              className="form-select custom-input"
+              value={categoryFilter}
+              onChange={(e) => setCategoryFilter(e.target.value)}
+            >
+              <option value="">All Categories</option>
+              {categories.map((cat) => (
+                <option key={cat} value={cat}>{cat}</option>
+              ))}
+            </select>
+          </div>
+
+          {/* Status Filter */}
+          <div className="col-6 col-lg-3">
+            <label className="form-label text-secondary small fw-medium">Status</label>
+            <select
+              className="form-select custom-input"
+              value={statusFilter}
+              onChange={(e) => setStatusFilter(e.target.value)}
+            >
+              <option value="">All Statuses</option>
+              <option value="Pending">Pending Review</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Resolved">Resolved</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      {/* Tracker List */}
       <h4 className="fw-bold text-light mb-4 fade-in-up">
         <i className="bi bi-activity text-primary me-2"></i>
         Active Trackers ({filteredComplaints.length})
       </h4>
 
-      {filteredComplaints.length === 0 ? (
+      {loading ? (
+        <div className="text-center py-5">
+          <div className="spinner-border text-primary" role="status" style={{ width: '2.5rem', height: '2.5rem' }}>
+            <span className="visually-hidden">Loading status trackers...</span>
+          </div>
+          <p className="mt-3 text-secondary">Loading complaints tracking...</p>
+        </div>
+      ) : filteredComplaints.length === 0 ? (
         <div className="card glass-panel text-center p-5 fade-in-up">
           <div className="card-body py-4">
             <div className="d-inline-flex justify-content-center align-items-center bg-primary bg-opacity-10 text-primary rounded-circle mb-4" style={{ width: '80px', height: '80px' }}>
@@ -107,7 +179,7 @@ const StudentTrackComplaints = () => {
             </p>
           </div>
         </div>
- ) : (
+      ) : (
         <div className="row fade-in-up">
           <div className="col-12 col-lg-9">
             {filteredComplaints.map((c) => {
@@ -123,17 +195,17 @@ const StudentTrackComplaints = () => {
               return (
                 <div key={c._id} className="card glass-panel mb-4 p-4">
                   <div className="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-3">
-                    <span className="badge bg-secondary bg-opacity-10 text-light border border-secondary border-opacity-20 d-flex align-items-center gap-2 px-3 py-2" style={{ borderRadius: '8px', fontSize: '0.8rem' }}>
+                    <span className="badge bg-secondary bg-opacity-20 text-light border border-secondary border-opacity-20 d-flex align-items-center gap-2 px-3 py-2" style={{ borderRadius: '8px', fontSize: '0.8rem' }}>
                       <i className={`bi ${iconClass} text-primary`}></i>
                       <span>{c.category}</span>
                     </span>
-                    <span className={`status-badge text-white ${statusDetails.class}`}>
+                    <span className={`status-badge ${statusDetails.class}`}>
                       <span>{statusDetails.label}</span>
                     </span>
                   </div>
 
                   <h4 className="fw-bold text-light mb-2">{c.title}</h4>
-                  <p className="text-light small mb-3 text-truncate-custom">{c.description}</p>
+                  <p className="text-secondary small mb-3 text-truncate-custom">{c.description}</p>
                   
                   {/* Detailed Timeline Tracker */}
                   <div className="my-3 border-top border-bottom border-opacity-10 py-3" style={{ borderColor: 'var(--border-color)' }}>
@@ -166,12 +238,13 @@ const StudentTrackComplaints = () => {
                         >
                           <i className="bi bi-check-lg fs-6"></i>
                         </div>
-                        <span className="small mt-4 text-center fw-medium text-light" style={{ fontSize: '0.65rem' }}>Submitted</span>
+                        <span className="small mt-2 text-center fw-medium text-light" style={{ fontSize: '0.65rem' }}>Submitted</span>
                       </div>
 
                       {/* Step 2: Under Review / In Progress */}
                       <div className="d-flex flex-column align-items-center position-relative" style={{ zIndex: 1, width: '90px' }}>
                         <div 
+                          className={`rounded-circle d-flex align-items-center justify-content-center border border-2 ${c.status === 'In Progress' ? 'local-spin-animation' : ''}`}
                           style={{ 
                             width: '32px', 
                             height: '32px', 
@@ -199,7 +272,7 @@ const StudentTrackComplaints = () => {
                         >
                           <i className={`bi ${c.status === 'Resolved' ? 'bi-check2-all' : 'bi-circle'} fs-6`}></i>
                         </div>
-                        <span className={`small mt-4 text-center  fw-medium ${c.status === 'Resolved' ? 'text-light' : 'text-muted'}`} style={{ fontSize: '0.65rem' }}>Resolved</span>
+                        <span className={`small mt-2 text-center fw-medium ${c.status === 'Resolved' ? 'text-light' : 'text-muted'}`} style={{ fontSize: '0.65rem' }}>Resolved</span>
                       </div>
                     </div>
 
@@ -228,7 +301,7 @@ const StudentTrackComplaints = () => {
                     </div>
                   </div>
 
-                  <div className="d-flex justify-content-between align-items-center small text-light" style={{ fontSize: '0.75rem' }}>
+                  <div className="d-flex justify-content-between align-items-center small text-muted" style={{ fontSize: '0.75rem' }}>
                     <span>Location: {c.location}</span>
                     <span>ID: #{c._id.substring(c._id.length - 8)}</span>
                   </div>
@@ -242,4 +315,4 @@ const StudentTrackComplaints = () => {
   );
 };
 
-export default StudentTrackComplaints
+export default StudentTrackComplaints;
