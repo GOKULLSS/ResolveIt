@@ -48,46 +48,8 @@ const AdminActiveComplaints = () => {
         
         const queryString = queryParams.length > 0 ? `?${queryParams.join('&')}` : '';
         const res = await axios.get(`/api/complaints${queryString}`);
+        setFilteredComplaints(res.data);
 
-       if (Array.isArray(res.data)) {
-  setFilteredComplaints(res.data);
-} else {
-  setFilteredComplaints([
-  {
-    _id: "1",
-    title: "WiFi Not Working",
-    category: "Internet/Wi-Fi",
-    location: "Library",
-    status: "Pending",
-    createdBy: {
-      name: "Test Student",
-      email: "test@gmail.com"
-    }
-  },
-  {
-    _id: "2",
-    title: "Broken Fan",
-    category: "Classroom",
-    location: "Block A",
-    status: "Resolved",
-    createdBy: {
-      name: "John",
-      email: "john@gmail.com"
-    }
-  },
-  {
-    _id: "3",
-    title: "Water Leakage",
-    category: "Hostel",
-    location: "Hostel B",
-    status: "In Progress",
-    createdBy: {
-      name: "Meera",
-      email: "meera@gmail.com"
-    }
-  }
-]);
-}
       } catch (err) {
         console.error('Error fetching filtered list:', err);
         setError('Failed to fetch complaints registry.');
@@ -101,15 +63,26 @@ const AdminActiveComplaints = () => {
   }, [filterCategory, filterStatus, filterDate, sortOrder]);
 
   // Handle status update actions (In Progress, Resolved)
-  const handleStatusUpdate = (id, newStatus) => {
-  setFilteredComplaints(
-    filteredComplaints.map((complaint) =>
-      complaint._id === id
-        ? { ...complaint, status: newStatus }
-        : complaint
-    )
-  );
-};
+  const handleStatusUpdate = async (id, newStatus) => {
+    try {
+      setError('');
+      await axios.put(`/api/complaints/${id}`, { status: newStatus });
+      
+      // Update filtered local complaints state
+      setFilteredComplaints(prev => 
+        prev.map(c => c._id === id ? { ...c, status: newStatus } : c)
+      );
+
+      // Update detail modal state if currently open
+      if (selectedComplaint && selectedComplaint._id === id) {
+        setSelectedComplaint(prev => ({ ...prev, status: newStatus }));
+      }
+    } catch (err) {
+      console.error('Error updating status:', err);
+      const errMsg = err.response?.data?.message || 'Failed to update complaint status.';
+      setError(errMsg);
+    }
+  };
 
   const resetFilters = () => {
     setFilterCategory('');
@@ -122,16 +95,6 @@ const AdminActiveComplaints = () => {
     const options = { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' };
     return new Date(dateString).toLocaleDateString(undefined, options);
   };
-
-  const displayedComplaints = filteredComplaints.filter((complaint) => {
-  const categoryMatch =
-    !filterCategory || complaint.category === filterCategory;
-
-  const statusMatch =
-    !filterStatus || complaint.status === filterStatus;
-
-  return categoryMatch && statusMatch;
-});
 
   if (loading) {
     return (
@@ -176,7 +139,7 @@ const AdminActiveComplaints = () => {
                   <span className='text-primary'>Complaints Registry</span>
                 </div>
                 <span className="badge bg-primary bg-opacity-10 text-primary border border-primary border-opacity-10 px-3 py-1 fs-6">
-                  {displayedComplaints.length} matched
+                  {filteredComplaints.length} matched
                 </span>
               </h5>
 
@@ -264,7 +227,7 @@ const AdminActiveComplaints = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {displayedComplaints.map(complaint => (
+                      {filteredComplaints.map(complaint => (
                         <tr key={complaint._id}>
                           <td>
                             <div className="fw-semibold text-secondary text-truncate" style={{ maxWidth: '300px' }}>{complaint.title}</div>

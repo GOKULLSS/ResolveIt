@@ -195,7 +195,7 @@ const StudentTrackComplaints = () => {
               return (
                 <div key={c._id} className="card glass-panel mb-4 p-4">
                   <div className="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-3">
-                    <span className="badge bg-secondary bg-opacity-20 text-light border border-secondary border-opacity-20 d-flex align-items-center gap-2 px-3 py-2" style={{ borderRadius: '8px', fontSize: '0.8rem' }}>
+                    <span className="badge  bg-opacity-20 text-light border border-secondary border-opacity-20 d-flex align-items-center gap-2 px-3 py-2" style={{ borderRadius: '8px', fontSize: '0.8rem' }}>
                       <i className={`bi ${iconClass} text-primary`}></i>
                       <span>{c.category}</span>
                     </span>
@@ -232,8 +232,8 @@ const StudentTrackComplaints = () => {
                             width: '32px', 
                             height: '32px', 
                             backgroundColor: 'var(--bg-primary)',
-                            borderColor: 'var(--status-resolved)',
-                            color: 'var(--status-resolved)'
+                            borderColor: 'var(--status-pending)',
+                            color: 'var(--status-pending)'
                           }}
                         >
                           <i className="bi bi-check-lg fs-6"></i>
@@ -249,8 +249,8 @@ const StudentTrackComplaints = () => {
                             width: '32px', 
                             height: '32px', 
                             backgroundColor: 'var(--bg-primary)',
-                            borderColor: c.status === 'Resolved' ? 'var(--status-resolved)' : c.status === 'In Progress' ? 'var(--status-inprogress)' : 'var(--border-color)',
-                            color: c.status === 'Resolved' ? 'var(--status-resolved)' : c.status === 'In Progress' ? 'var(--status-inprogress)' : 'var(--text-muted)'
+                            borderColor: c.status === 'Resolved' ? 'var(--status-inprogress)' : c.status === 'In Progress' ? 'var(--status-inprogress)' : 'var(--border-color)',
+                            color: c.status === 'Resolved' ? 'var(--status-inprogress)' : c.status === 'In Progress' ? 'var(--status-inprogress)' : 'var(--text-muted)'
                           }}
                         >
                           <i className={`bi ${c.status === 'Resolved' ? 'bi-check-lg' : c.status === 'In Progress' ? 'bi-arrow-repeat' : 'bi-circle'} fs-6`}></i>

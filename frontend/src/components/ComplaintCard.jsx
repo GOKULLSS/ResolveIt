@@ -64,7 +64,7 @@ const ComplaintCard = ({ complaint, onDelete }) => {
         <div className="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-3">
 
           <span
-            className="badge bg-secondary bg-opacity-20 text-light border border-secondary border-opacity-20 d-flex align-items-center gap-2 px-3 py-2"
+            className="badge   text-light border border-secondary border-opacity-10 d-flex align-items-center gap-2 px-3 py-2"
             style={{
               borderRadius: '8px',
               fontSize: '0.8rem'

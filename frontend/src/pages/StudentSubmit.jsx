@@ -231,8 +231,8 @@ const StudentSubmit = () => {
                     </>
                   ) : (
                     <>
-                      <span>{isEditMode ? 'Save Changes' : 'File Complaint'}</span>
-                      <i className="bi bi-send-fill"></i>
+                      <span className='text-white'>{isEditMode ? 'Save Changes' : 'File Complaint'}</span>
+                      <i className="bi bi-send-fill text-white"></i>
                     </>
                   )}
                 </button>

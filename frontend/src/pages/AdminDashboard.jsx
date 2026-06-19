@@ -1,96 +1,61 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from "react-router-dom";
 import CategoryChart from '../components/CategoryChart';
+import axios from 'axios';
 
 
 const AdminDashboard = () => {
-  // Dummy Data Start
+  // Unfiltered complaints for overall metrics and charts
+  const [allComplaints, setAllComplaints] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
 
-  // const error="this is dummy error"
-  const error = null;
-  const stats = {
-    total: 20,
-    pending: 10,
-    inprogress: 6,
-    resolved: 4
-  }
-  const allComplaints = [
-  {
-    id: 1,
-    title: "Projector not working",
-    category: "Classroom",
-    status: "Pending"
-  },
- 
-  {
-    id: 2,
-    title: "AC not working in lab",
-    category: "Laboratory",
-    status: "In Progress"
-  },
-  {
-    id: 3,
-    title: "Water leakage in hostel",
-    category: "Hostel",
-    status: "Pending"
-  },
-  {
-    id: 4,
-    title: "Hostel room light issue",
-    category: "Hostel",
-    status: "Resolved"
-  },
+  // Overall counts for metric cards
+  const [stats, setStats] = useState({
+    total: 0,
+    pending: 0,
+    inprogress: 0,
+    resolved: 0
+  });
 
-  {
-    id: 5,
-    title: "Slow Wi-Fi connection",
-    category: "Internet/Wi-Fi",
-    status: "In Progress"
-  },
-  {
-    id: 6,
-    title: "No internet in block A",
-    category: "Internet/Wi-Fi",
-    status: "Pending"
-  },
-  {
-    id: 7,
-    title: "Power outage in corridor",
-    category: "Electrical",
-    status: "Pending"
-  },
-  {
-    id: 8,
-    title: "Switch board damaged",
-    category: "Electrical",
-    status: "Resolved"
-  },
-  {
-    id: 9,
-    title: "Power outage in corridor",
-    category: "Electrical",
-    status: "Pending"
-  },
-  {
-    id: 10,
-    title: "Switch board damaged",
-    category: "Electrical",
-    status: "Resolved"
-  },
-  {
-    id: 11,
-    title: "Dirty classroom",
-    category: "Cleanliness",
-    status: "In Progress"
-  },
-  {
-    id: 12,
-    title: "Miscellaneous complaint",
-    category: "Other",
-    status: "Pending"
+  // Fetch overall unfiltered complaints for metrics and chart
+  const fetchOverallStats = async () => {
+    try {
+      const res = await axios.get('/api/complaints');
+      setAllComplaints(res.data);
+      
+      const total = res.data.length;
+      const pending = res.data.filter(c => c.status === 'Pending').length;
+      const inprogress = res.data.filter(c => c.status === 'In Progress').length;
+      const resolved = res.data.filter(c => c.status === 'Resolved').length;
+      
+      setStats({ total, pending, inprogress, resolved });
+    } catch (err) {
+      console.error('Error fetching stats:', err);
+      setError('Failed to fetch dashboard metrics.');
+    }
+  };
+
+  // Load everything on startup
+  useEffect(() => {
+    const loadDashboard = async () => {
+      setLoading(true);
+      await fetchOverallStats();
+      setLoading(false);
+    };
+    loadDashboard();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="container py-5 text-center">
+        <div className="spinner-border text-primary" role="status" style={{ width: '3rem', height: '3rem' }}>
+          <span className="visually-hidden">Loading Dashboard...</span>
+        </div>
+        <p className="mt-3 text-secondary">Loading CCMS Admin Dashboard...</p>
+      </div>
+    );
   }
-];
-  // Dummy Data End
   return (
     <div className="container py-5 ">
       <div className="d-flex justify-content-between align-items-center flex-wrap ">

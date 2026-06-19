@@ -90,11 +90,6 @@ const StudentViewComplaints = () => {
             View, search, edit or delete your complaints.
           </p>
         </div>
-
-        <button className="btn btn-primary-gradient px-4 py-3 d-flex align-items-center gap-2">
-          <i className="bi bi-plus-circle-fill"></i>
-          <span>File New Complaint</span>
-        </button>
       </div>
 
       <div className="card glass-panel mb-4 p-4 fade-in-up">
