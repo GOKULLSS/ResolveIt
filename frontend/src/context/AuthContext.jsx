@@ -21,7 +21,7 @@ export const AuthProvider = ({ children }) => {
         localStorage.removeItem('ccms_token');
       }
     }, [token]);
-
+   
      // Load user data on startup if token exists
     useEffect(() => {
       const fetchUserData = async () => {

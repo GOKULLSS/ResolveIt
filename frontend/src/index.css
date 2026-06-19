@@ -1,3 +1,9 @@
+:root{
+   --status-pending: #f59e0b; /* Amber */
+  --status-inprogress: #06b6d4; /* Cyan */
+  --status-resolved: #10b981; /* Emerald */
+  
+}
 .custom-navbar{
   background:rgba(0, 0, 0, 0.8); 
   backdrop-filter: blur(12px);
@@ -13,7 +19,7 @@
   border-radius: 20px;
 }
 .custom-input {
-  background-color: rgba(7, 7, 47, 0.975) !important;
+  background-color: rgba(138, 138, 189, 0.975) !important;
   border: 1px solid var(--border-color) !important;
   color: var(--text-primary) !important;
   border-radius: 8px !important;
