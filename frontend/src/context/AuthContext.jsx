@@ -2,11 +2,11 @@ import { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
 
  // Set default Axios configurations
-//axios.defaults.baseURL = import.meta.env.VITE_API_URL || 'http://localhost:5000'; 
+axios.defaults.baseURL = import.meta.env.VITE_API_URL || 'http://localhost:5000'; 
 
 export const AuthContext = createContext();
 
-export const AuthProvider = ({ childern }) => {
+export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(localStorage.getItem('ccms_token'));
   const [loading, setLoading] = useState(true);

@@ -27,7 +27,7 @@ app.use('/api/complaints', complaintRoutes);
 
 // Root endpoint
 app.get('/', (req, res) => {
-  res.json({ message: 'Campus Complaint Management System (CCMS) API is running' });
+  res.json({ message: 'ResolveIt API is running' });
 });
 
 // 404 Route handler

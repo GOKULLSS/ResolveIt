@@ -14,35 +14,7 @@ const categories = [
   'Other'
 ];
 
-// ==========================================
-// 1. DUMMY DATA FOR TESTING
-// ==========================================
-const dummyComplaints = [
-  {
-    id: '1',
-    title: 'Broken fan in Room 102',
-    category: 'Electrical',
-    description: 'The ceiling fan in Room 102 makes a loud buzzing noise and rotates very slowly.',
-    location: 'Block A, 1st floor, Room 102',
-    status: 'Pending'
-  },
-  {
-    id: '2',
-    title: 'Water leakage in main bathroom',
-    category: 'Water Supply',
-    description: 'The flush tap in the ground floor washroom keeps running constantly.',
-    location: 'Hostel Block C, Ground floor',
-    status: 'Pending'
-  },
-  {
-    id: '3',
-    title: 'No internet connection',
-    category: 'Internet/WI-FI',
-    description: 'WiFi is connected but throws DNS errors since this morning.',
-    location: 'Library, 2nd floor',
-    status: 'Under Review' // Used to test the "cannot edit if under review/resolved" block
-  }
-];
+
 
 const StudentSubmit = () => {
   const { id } = useParams();
@@ -60,26 +32,15 @@ const StudentSubmit = () => {
 
   useEffect(() => {
     if (isEditMode) {
-      // FIX: Standardized the name to fetchComplaintDetail to match its execution call below
+     
       const fetchComplaintDetail = async () => {
         try {
           setFetchLoading(true);
           setError('');
 
-          /* 
-          // ------------------------------------------------------------
-          // ORIGINAL LIVE API CODE (Commented out for Dummy Testing)
-          // ------------------------------------------------------------
+          
           const res = await axios.get('/api/complaints');
-          const complaint = res.data.find((c) => c.id === id);
-          */
-
-          // ------------------------------------------------------------
-          // DUMMY DATA SIMULATION
-          // ------------------------------------------------------------
-          // Simulating a minor network latency delay
-          await new Promise((resolve) => setTimeout(resolve, 600));
-          const complaint = dummyComplaints.find((c) => c.id === id);
+          const complaint = res.data.find((c) => c._id === id);
 
           if (!complaint) {
             setError('Complaint not found or you do not have permission to edit it.');
@@ -105,7 +66,6 @@ const StudentSubmit = () => {
 
       fetchComplaintDetail();
     }
-  // FIX: Changed 'isEditModel' to 'isEditMode' to resolve the Uncaught ReferenceError
   }, [id, isEditMode]);
 
   const handleSubmit = async (e) => {
@@ -121,22 +81,11 @@ const StudentSubmit = () => {
     try {
       const payload = { title, category, description, location };
       
-      /*
-      // ------------------------------------------------------------
-      // ORIGINAL LIVE API CODE (Commented out for Dummy Testing)
-      // ------------------------------------------------------------
       if (isEditMode) {
         await axios.put(`/api/complaints/${id}`, payload);
       } else {
         await axios.post('/api/complaints', payload);
       }
-      */
-
-      // ------------------------------------------------------------
-      // DUMMY SUBMISSION SIMULATION
-      // ------------------------------------------------------------
-      console.log('Successfully captured form data payload:', payload);
-      await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulate response wait
 
       Navigate('/view-complaints');
     } catch (err) {

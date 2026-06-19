@@ -10,13 +10,14 @@ export const createComplaint = async (req, res) => {
     if(!title || !category || !description || !location) {
       return res.status(400).json({ message: 'Please provide title, category, description, and location' });
     }
+   
 
-    const compiant = await Compliant.create({
+    const complaint = await Complaint.create({
       title,
       category,
       description,
       location,
-      creditedBy: req.user._id,
+      createdBy: req.user._id,
       status: 'Pending',
     });
   
