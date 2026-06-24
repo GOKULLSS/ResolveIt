@@ -97,6 +97,14 @@ const Navbar = () => {
                     student
                   </span>
                 </div>
+                <Link
+                  to="/profile"
+                  className="btn btn-outline-light btn-sm d-flex align-items-center gap-2 px-3 py-2"
+                  style={{ borderRadius: '8px', transition: 'all 0.2s', border: '1px solid rgba(255, 255, 255, 0.15)', background: 'rgba(255, 255, 255, 0.05)' }}
+                >
+                  <i className="bi bi-person-circle"></i>
+                  <span>Profile</span>
+                </Link>
                 <button
                   onClick={handleLogout}
                   className="btn btn-outline-danger btn-sm d-flex align-items-center gap-2 px-3 py-2"

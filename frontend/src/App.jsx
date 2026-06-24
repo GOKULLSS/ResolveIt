@@ -17,6 +17,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 import AdminActiveComplaints from "./pages/AdminActiveComplaints";
 import { useContext } from "react";
 import AuthContext, { AuthProvider } from "./context/AuthContext";
+import Profile from "./pages/Profile";
 
 const NavigationRedirect = () => {
   const { user } = useContext(AuthContext);
@@ -98,6 +99,15 @@ function App() {
                 element={
                   <ProtectedRoute allowedRoles={["Admin"]}>
                     <AdminActiveComplaints />
+                  </ProtectedRoute>
+                }
+              />
+              {/* Profile Route */}
+              <Route
+                path="/profile"
+                element={
+                  <ProtectedRoute allowedRoles={['Student', 'Admin']}>
+                    <Profile />
                   </ProtectedRoute>
                 }
               />
