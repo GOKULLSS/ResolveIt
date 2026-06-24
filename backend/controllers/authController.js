@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken';
 import User from '../models/User.js';
+import Complaint from '../models/Complaint.js';
 
 //generate jwt token
 const generateToken = (id) => {
@@ -101,3 +102,79 @@ export const getMe = async (req, res) => {
     return res.status(500).json({ message: 'Server error fetching user profile.' });
   }
 };
+
+// @desc    Update user profile details
+// @route   PUT /api/auth/profile
+// @access  Private
+export const updateUserProfile = async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id);
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    const { name, email, password } = req.body;
+
+    if (name) user.name = name;
+
+    if (email) {
+      const emailLower = email.toLowerCase();
+      if (emailLower !== user.email) {
+        // Check if new email already exists
+        const emailExists = await User.findOne({ email: emailLower });
+        if (emailExists) {
+          return res.status(400).json({ message: 'User already exists with this email' });
+        }
+        user.email = emailLower;
+      }
+    }
+
+    if (password) {
+      if (password.length < 6) {
+        return res.status(400).json({ message: 'Password must be at least 6 characters long' });
+      }
+      user.password = password; // pre-save hook will hash it
+    }
+
+    const updatedUser = await user.save();
+
+    return res.json({
+      _id: updatedUser._id,
+      name: updatedUser.name,
+      email: updatedUser.email,
+      role: updatedUser.role,
+      token: generateToken(updatedUser._id),
+    });
+  } catch (error) {
+    console.error('Update Profile Error:', error.message);
+    return res.status(500).json({ message: 'Server error updating profile.' });
+  }
+};
+
+// @desc    Delete user profile and all associated complaints
+// @route   DELETE /api/auth/profile
+// @access  Private
+export const deleteUserProfile = async (req, res) => {
+  try {
+    const userId = req.user._id;
+
+    // Check if user exists
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // Delete all complaints created by the user
+    await Complaint.deleteMany({ createdBy: userId });
+
+    // Delete the user profile
+    await User.findByIdAndDelete(userId);
+
+    return res.json({ message: 'User profile and all associated complaints deleted successfully' });
+  } catch (error) {
+    console.error('Delete Profile Error:', error.message);
+    return res.status(500).json({ message: 'Server error deleting profile.' });
+  }
+};
+
