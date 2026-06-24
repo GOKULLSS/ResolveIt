@@ -92,6 +92,42 @@ export const AuthProvider = ({ children }) => {
       setUser(null);
       localStorage.removeItem('ccms_token');
     };
+
+    // Update Profile handler
+  const updateProfile = async (name, email, password) => {
+    setLoading(true);
+    try {
+      const res = await axios.put('/api/auth/profile', { name, email, password });
+      setToken(res.data.token);
+      setUser({
+        _id: res.data._id,
+        name: res.data.name,
+        email: res.data.email,
+        role: res.data.role
+      });
+      return { success: true };
+    } catch (err) {
+      const errorMsg = err.response?.data?.message || 'Update failed. Please try again.';
+      return { success: false, error: errorMsg };
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Delete Account handler
+  const deleteAccount = async () => {
+    setLoading(true);
+    try {
+      await axios.delete('/api/auth/profile');
+      logout();
+      return { success: true };
+    } catch (err) {
+      const errorMsg = err.response?.data?.message || 'Account deletion failed. Please try again.';
+      return { success: false, error: errorMsg };
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <AuthContext.Provider
         value={{
@@ -101,6 +137,8 @@ export const AuthProvider = ({ children }) => {
           login,
           register,
           logout,
+          updateProfile,
+          deleteAccount,
           isAuthenticated: !!user
         }}
       >
