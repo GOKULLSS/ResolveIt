@@ -5,7 +5,7 @@ const categories = [
   'Laboratory',
   'Hostel',
   'Library',
-  'Internet/Wi-Fi',
+  'Internet/WI-FI',
   'Electrical',
   'Water Supply',
   'Cleanliness',
