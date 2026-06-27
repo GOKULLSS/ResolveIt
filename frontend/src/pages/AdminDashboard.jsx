@@ -82,60 +82,59 @@ const AdminDashboard = () => {
           <div>{error}</div>
         </div>
       )}
-      <div className="row g-4 mb-5 ">
-        <div className="col-12 col-md-3">
-          <div className="card  glass-panel h-100 p-5 mt-2"style={{ fontSize: '0.8rem', letterSpacing: '0.5px' }}>
-            <div className="d-flex align-items-center justify-content-between">
-              <div >
-                <h3 className="text-danger fw-semibold text-uppercase mb-3 " style={{fontSize:"1.2rem"}}>Total Cases</h3>
-                <h1 className="text-white">{stats.total}</h1>
-              </div>
-              <div className="bg-primary bg-opacity-10 text-danger p-3 rounded-4">
-                <i className="bi bi-list-stars fs-3"></i>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="col-12 col-md-3">
-          <div className="card  glass-panel h-100 p-5 mt-2"style={{ fontSize: '0.8rem', letterSpacing: '0.5px' }}>
-            <div className="d-flex align-items-center justify-content-between">
-              <div >
-                <h3 className="text-warning fw-semibold text-uppercase mb-3">Pending<br/></h3>
-                <h1 className="text-white">{stats.pending}</h1>
-              </div>
-              <div className="bg-primary bg-opacity-10 text-warning p-3 rounded-4">
-                <i className="bi bi-clock-history fs-3"></i>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="col-12 col-md-3">
-          <div className="card  glass-panel h-100  p-5 mt-2"style={{ fontSize: '0.8rem', letterSpacing: '0.5px' }}>
-            <div className="d-flex align-items-center justify-content-between">
-              <div >
-                <h3 className="text-primary fw-semibold text-uppercase mb-3">In Progress</h3>
-                <h1 className="text-white">{stats.inprogress}</h1>
-              </div>
-              <div className="bg-primary bg-opacity-10 text-primary p-3 rounded-4">
-                <i className="bi bi-hourglass-split fs-3"></i>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="col-12 col-md-3">
-          <div className="card  glass-panel h-100  p-5 mt-2"style={{ fontSize: '0.8rem', letterSpacing: '0.5px' }}>
-            <div className="d-flex align-items-center justify-content-between">
-              <div >
-                <h3 className="text-success fw-semibold text-uppercase mb-3">Resolved</h3>
-                <h1 className="text-white">{stats.resolved}</h1>
-              </div>
-              <div className="bg-primary bg-opacity-10 text-success p-3 rounded-4">
-                <i className="bi bi-check2-square fs-3"></i>
-              </div>
-            </div>
-          </div>
-        </div>
+      <div className="row g-4 mb-5 mt-2">
+  <div className="col-12 col-md-3">
+    <div className="glass-panel stat-card">
+      <div className="stat-icon danger">
+        <i className="bi bi-list-stars"></i>
       </div>
+
+      <div className="stat-content">
+        <span>Total Cases</span>
+        <h2>{stats.total}</h2>
+      </div>
+    </div>
+  </div>
+
+  <div className="col-12 col-md-3">
+    <div className="glass-panel stat-card">
+      <div className="stat-icon warning">
+        <i className="bi bi-clock-history"></i>
+      </div>
+
+      <div className="stat-content">
+        <span>Pending</span>
+        <h2>{stats.pending}</h2>
+      </div>
+    </div>
+  </div>
+
+  <div className="col-12 col-md-3">
+    <div className="glass-panel stat-card">
+      <div className="stat-icon primary">
+        <i className="bi bi-hourglass-split"></i>
+      </div>
+
+      <div className="stat-content">
+        <span>In Progress</span>
+        <h2>{stats.inprogress}</h2>
+      </div>
+    </div>
+  </div>
+
+  <div className="col-12 col-md-3">
+    <div className="glass-panel stat-card">
+      <div className="stat-icon success">
+        <i className="bi bi-check2-square"></i>
+      </div>
+
+      <div className="stat-content">
+        <span>Resolved</span>
+        <h2>{stats.resolved}</h2>
+      </div>
+    </div>
+  </div>
+</div>
       <div>
         <CategoryChart complaints={allComplaints}/>
       </div>

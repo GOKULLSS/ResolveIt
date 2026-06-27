@@ -63,61 +63,40 @@ const StudentDashboard = () => {
           <div>{error}</div>
         </div>
       )}
-      <div className="row g-4 mb-5 ">
-        <div className="col-12 col-md-4">
-          <div
-            className="card  glass-panel h-100 p-5 mt-2"
-            style={{ fontSize: "0.8rem", letterSpacing: "0.5px" }}
-          >
-            <div className="d-flex align-items-center justify-content-between">
-              <div>
-                <h3 className="text-danger fw-semibold text-uppercase mb-3">
-                  Total <br />
-                  Raised
-                </h3>
-                <h1 className="text-white">{stats.total}</h1>
-              </div>
-              <div className="bg-primary bg-opacity-10 text-danger p-3 rounded-4">
-                <i className="bi bi-list-stars fs-3"></i>
-              </div>
+      <div className="row g-4 mb-5 mt-2 ">
+        <div className="col-12 col-md-4 ">
+          <div className="glass-panel stat-card">
+            <div className="stat-icon danger">
+              <i className="bi bi-list-stars"></i>
+            </div>
+
+            <div className="stat-content">
+              <span>Total Raised</span>
+              <h2>{stats.total}</h2>
             </div>
           </div>
         </div>
-        <div className="col-12 col-md-4">
-          <div
-            className="card  glass-panel h-100 p-5 mt-2"
-            style={{ fontSize: "0.8rem", letterSpacing: "0.5px" }}
-          >
-            <div className="d-flex align-items-center justify-content-between">
-              <div>
-                <h3 className="text-primary fw-semibold text-uppercase mb-3">
-                  PENDING
-                  <br /> REVIEW
-                </h3>
-                <h1 className="text-white">{stats.pending}</h1>
-              </div>
-              <div className="bg-primary bg-opacity-10 text-primary p-3 rounded-4">
-                <i className="bi bi-hourglass-split fs-3"></i>
-              </div>
+        <div className="col-12 col-md-4 ">
+          <div className="glass-panel stat-card">
+            <div className="stat-icon primary">
+              <i className="bi bi-hourglass"></i>
+            </div>
+
+            <div className="stat-content">
+              <span>PENDING REVIEW</span>
+              <h2>{stats.pending}</h2>
             </div>
           </div>
         </div>
-        <div className="col-12 col-md-4">
-          <div
-            className="card  glass-panel h-100  p-5 mt-2"
-            style={{ fontSize: "0.8rem", letterSpacing: "0.5px" }}
-          >
-            <div className="d-flex align-items-center justify-content-between">
-              <div>
-                <h3 className="text-success fw-semibold text-uppercase mb-3">
-                  RESOLVED <br />
-                  CASES
-                </h3>
-                <h1 className="text-white">{stats.resolved}</h1>
-              </div>
-              <div className="bg-primary bg-opacity-10 text-success p-3 rounded-4">
-                <i className="bi bi-check2-square fs-3"></i>
-              </div>
+        <div className="col-12 col-md-4 ">
+          <div className="glass-panel stat-card">
+            <div className="stat-icon  success">
+              <i className="bi bi-check2-square"></i>
+            </div>
+
+            <div className="stat-content">
+              <span>RESOLVED CASES</span>
+              <h2>{stats.resolved}</h2>
             </div>
           </div>
         </div>
