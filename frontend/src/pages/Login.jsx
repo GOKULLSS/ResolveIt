@@ -8,12 +8,7 @@ const Login = () => {
   const [formError, setFormError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
- // const { login, user, isAuthenticated } = useContext(AuthContext);
-  const user = {
-    name: "Gokulzz",
-    role: "Admin",
-  };
-  const isAuthenticated = false
+ const { login, user, isAuthenticated } = useContext(AuthContext);
   
   const navigate = useNavigate();
 

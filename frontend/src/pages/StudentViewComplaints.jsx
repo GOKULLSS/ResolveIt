@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ComplaintCard from '../components/ComplaintCard';
+import axios from 'axios';
 
 const categories = [
   'Classroom',
@@ -15,45 +16,45 @@ const categories = [
 
 const StudentViewComplaints = () => {
 
-  const [complaints, setComplaints] = useState([
-    {
-      _id: 'CMP001',
-      title: 'Classroom Fan Not Working',
-      category: 'Classroom',
-      description: 'The ceiling fan in Room 204 is not functioning properly.',
-      location: 'Block A - Room 204',
-      status: 'Pending',
-      createdDate: '2025-06-10'
-    },
-    {
-      _id: 'CMP002',
-      title: 'Wi-Fi Connectivity Issue',
-      category: 'Internet/Wi-Fi',
-      description: 'Internet connection is very slow in hostel.',
-      location: 'Boys Hostel',
-      status: 'In Progress',
-      createdDate: '2025-06-08'
-    },
-    {
-      _id: 'CMP003',
-      title: 'Water Leakage',
-      category: 'Water Supply',
-      description: 'Water leakage near washroom area.',
-      location: 'Academic Block',
-      status: 'Resolved',
-      createdDate: '2025-06-05'
-    }
-  ]);
+  const [complaints, setComplaints] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
 
+  // Search and Filter State
   const [searchTerm, setSearchTerm] = useState('');
   const [categoryFilter, setCategoryFilter] = useState('');
   const [statusFilter, setStatusFilter] = useState('');
 
-  const handleDelete = (id) => {
-    if (window.confirm('Delete this complaint?')) {
-      setComplaints(
-        complaints.filter((item) => item._id !== id)
-      );
+    useEffect(() => {
+    const fetchComplaints = async () => {
+      try {
+        const res = await axios.get('/api/complaints');
+        setComplaints(res.data);
+      } catch (err) {
+        console.error('Error fetching complaints:', err);
+        setError('Could not retrieve complaints list. Please try again.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchComplaints();
+  }, []);
+
+  const handleDelete = async (id) => {
+    if (!window.confirm('Are you sure you want to delete this complaint? This action cannot be undone.')) {
+      return;
+    }
+
+    try {
+      setError('');
+      await axios.delete(`/api/complaints/${id}`);
+      // Filter out deleted item
+      setComplaints(complaints.filter((c) => c._id !== id));
+    } catch (err) {
+      console.error('Error deleting complaint:', err);
+      const errorMsg = err.response?.data?.message || 'Failed to delete complaint. Please try again.';
+      setError(errorMsg);
     }
   };
 
@@ -89,11 +90,6 @@ const StudentViewComplaints = () => {
             View, search, edit or delete your complaints.
           </p>
         </div>
-
-        <button className="btn btn-primary-gradient px-4 py-3 d-flex align-items-center gap-2">
-          <i className="bi bi-plus-circle-fill"></i>
-          <span>File New Complaint</span>
-        </button>
       </div>
 
       <div className="card glass-panel mb-4 p-4 fade-in-up">

@@ -11,16 +11,16 @@ const Register = () => {
   const [formError, setFormError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  //const { register, user, isAuthenticated } = useContext(AuthContext);
+  const { register, user, isAuthenticated } = useContext(AuthContext);
 
   //dummy data
-  const user = {
-    name: "Gokulzz",
-    email: "student@123.com",
-    password: "123456",
-    role: "Admin",
-  };
-  const isAuthenticated = false
+  // const user = {
+  //   name: "Gokulzz",
+  //   email: "student@123.com",
+  //   password: "123456",
+  //   role: "Admin",
+  // };
+  // const isAuthenticated = false
 
   const navigate = useNavigate();
 
