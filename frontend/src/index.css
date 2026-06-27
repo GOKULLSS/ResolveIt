@@ -13,18 +13,65 @@
   transition: var(--transition-smooth);
 
 }
-.glass-panel {
-  background: rgb(13, 3, 53);
+/* .glass-panel {
+  background: rgb(2 1 14);
   box-shadow: var(--card-shadow);
   border-radius: 20px;
+} */
+ .glass-panel{
+    background: rgba(255,255,255,.05);
+
+    border:1px solid rgba(255,255,255,.12);
+
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    box-shadow:
+        0 8px 32px rgba(0,0,0,.35);
+
+    border-radius:20px;
+
+    overflow:hidden;
 }
-.custom-input {
-  background-color: rgba(138, 138, 189, 0.975) !important;
-  border: 1px solid var(--border-color) !important;
-  color: var(--text-primary) !important;
-  border-radius: 8px !important;
+
+ .custom-input {
+  background: rgba(255, 255, 255, 0.05) !important;
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+
+  color: #ffffff !important;
+
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border-radius: 12px !important;
+
   padding: 0.75rem 1rem !important;
-  transition: var(--transition-smooth) !important;
+
+  transition: all 0.3s ease !important;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 4px 20px rgba(0, 0, 0, 0.2);
+}
+.custom-input:focus {
+  background: rgba(255, 255, 255, 0.08) !important;
+
+  border-color: rgba(59, 130, 246, 0.6) !important;
+
+  box-shadow:
+    0 0 0 4px rgba(59, 130, 246, 0.15),
+    0 0 20px rgba(59, 130, 246, 0.2);
+
+  outline: none;
+}
+.custom-input::placeholder {
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+.custom-input::selection {
+  background: rgba(59, 130, 246, 0.4);
+}
+.custom-input option {
+  background: #0b1120;
+  color: white;
 }
 
  .custom-input:focus {
@@ -45,7 +92,7 @@
 }
 
 .custom-table th {
-  background-color: rgba(3, 3, 84, 0.975) !important;
+  background-color: rgb(2 1 14) !important;
   border-bottom: 2px solid var(--border-color) !important;
   color: var(--text-secondary) !important;
   font-weight: 600;
@@ -53,7 +100,7 @@
 }
 
 .custom-table td {
-  background-color: rgba(10, 36, 113, 0.2) !important;
+  background-color: rgb(15 14 26) !important;
   border-bottom: 1px solid var(--border-color) !important;
   padding: 1rem !important;
   vertical-align: middle;
@@ -102,4 +149,306 @@
 
 .fade-in-up {
   animation: fadeIn 0.4s ease-out forwards;
+}
+
+/* ============================
+   Animated Background
+============================ */
+
+.animated-bg {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+  background: #030308;
+}
+
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: .45;
+  animation: float 18s infinite ease-in-out alternate;
+}
+
+.blob1 {
+  width: 450px;
+  height: 450px;
+
+  background: #2563eb;
+  top: -120px;
+  left: -120px;
+}
+
+.blob2 {
+  width: 500px;
+  height: 500px;
+
+  background: #7c3aed;
+  bottom: -150px;
+  right: -120px;
+
+  animation-duration: 24s;
+}
+
+.blob3 {
+  width: 200px;
+  height: 200px;
+
+  background: #06b6d4;
+  top: 45%;
+  left: 45%;
+
+  animation-duration: 20s;
+}
+
+@keyframes float {
+
+  0%{
+    transform: translate(0,0) scale(1);
+  }
+
+  25%{
+    transform: translate(120px,-80px) scale(1.15);
+  }
+
+  50%{
+    transform: translate(-90px,100px) scale(.9);
+  }
+
+  75%{
+    transform: translate(60px,-140px) scale(1.1);
+  }
+
+  100%{
+    transform: translate(-100px,80px) scale(1);
+  }
+
+}
+
+.container,
+footer,
+.card,
+.glass-panel {
+    position: relative;
+    z-index: 2;
+}
+
+.animated-bg::before{
+    content:"";
+    position:absolute;
+    inset:0;
+
+    background-image:
+        linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+
+    background-size:50px 50px;
+
+    animation:gridMove 20s linear infinite;
+}
+
+@keyframes gridMove{
+
+    from{
+        transform:translateY(0);
+    }
+
+    to{
+        transform:translateY(50px);
+    }
+
+}
+
+/* Progress container */
+.progress {
+    height: 8px;
+    border-radius: 20px;
+    overflow: hidden;
+    background: rgba(255,255,255,.06);
+}
+
+/* Animated bar */
+.animated-progress {
+    position: relative;
+    width: 0;
+    border-radius: 20px;
+    overflow: hidden;
+
+    animation: fillBar 1.5s ease forwards;
+}
+
+/* Left -> Right filling */
+@keyframes fillBar {
+    from {
+        width: 0;
+    }
+    to {
+        width: var(--target-width);
+    }
+}
+.sparkle {
+    position: absolute;
+
+    right: -8px;
+    top: 50%;
+
+    width: 16px;
+    height: 16px;
+
+    transform: translateY(-50%);
+
+    border-radius: 50%;
+
+    background: white;
+
+    filter: blur(2px);
+
+    box-shadow:
+        0 0 6px white,
+        0 0 12px white,
+        0 0 18px white;
+
+    animation: sparkleMove 1.5s ease forwards;
+}
+
+@keyframes sparkleMove {
+
+    from{
+        left:-10px;
+        opacity:0;
+    }
+
+    20%{
+        opacity:1;
+    }
+
+    100%{
+        left:calc(100% - 8px);
+        opacity:0;
+    }
+
+}
+
+
+.dashboard-title{
+    color: #ffffff;
+    font-style: italic;
+    font-weight: 700;
+}
+
+.dashboard-subtitle{
+    color:#9ca3af;
+    font-size:1rem;
+}
+
+.user-name{
+    color:#60a5fa;
+    font-weight:700;
+}
+.stat-card{
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:30px;
+
+    min-height:170px;
+
+    transition:.35s;
+
+    cursor:pointer;
+}
+
+.stat-card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:
+    0 15px 40px rgba(37,99,235,.15);
+
+}
+.stat-icon{
+
+    width:72px;
+    height:72px;
+
+    border-radius:18px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    font-size:2rem;
+
+    background:rgba(255,255,255,.05);
+
+    backdrop-filter:blur(15px);
+}
+.stat-icon.danger{
+
+    color:#ef4444;
+
+    background:rgba(239,68,68,.15);
+}
+
+.stat-icon.primary{
+
+    color:#3b82f6;
+
+    background:rgba(59,130,246,.15);
+}
+.stat-icon.warning{
+
+    color:#eeb109;
+
+    background:rgba(59,130,246,.15);
+}
+
+.stat-icon.success{
+
+    color:#10b981;
+
+    background:rgba(16,185,129,.15);
+}
+.stat-content span{
+
+    font-size:.85rem;
+
+    color:#9ca3af;
+
+    text-transform:uppercase;
+
+    letter-spacing:2px;
+}
+
+.stat-content h2{
+
+    margin-top:10px;
+
+    font-size:2.5rem;
+
+    font-weight:800;
+
+    color:white;
+}
+.stat-content h2{
+
+    animation:numberPop .8s ease;
+}
+
+@keyframes numberPop{
+
+    0%{
+        transform:scale(.7);
+        opacity:0;
+    }
+
+    100%{
+        transform:scale(1);
+        opacity:1;
+    }
+
 }

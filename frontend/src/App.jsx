@@ -36,10 +36,15 @@ function App() {
       <Router>
         <div
           className="d-flex flex-column min-vh-100"
-          style={{ backgroundColor: "#000026" }}
+          style={{ backgroundColor: "#030308" }}
         >
+          <div className="animated-bg">
+            <div className="blob blob1"></div>
+            <div className="blob blob2"></div>
+            <div className="blob blob3"></div>
+          </div>
           <Navbar />
-          <div>
+          <div className="position-relative" style={{ zIndex: 2 }}>
             <Routes>
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
@@ -106,7 +111,7 @@ function App() {
               <Route
                 path="/profile"
                 element={
-                  <ProtectedRoute allowedRoles={['Student', 'Admin']}>
+                  <ProtectedRoute allowedRoles={["Student", "Admin"]}>
                     <Profile />
                   </ProtectedRoute>
                 }
