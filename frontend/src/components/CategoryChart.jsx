@@ -81,7 +81,7 @@ const CategoryChart = ({complaints}) => {
                       <span className='text-primary small'>({percentage}%)</span>
                     </div>
                   </div>
-                  <div className='progress' style={{backgroundColor:'rgba(255,255,255,0.05)'}}>
+                  {/* <div className='progress' style={{backgroundColor:'rgba(255,255,255,0.05)'}}>
                     <div 
                     className='progress-bar'
                      role='progressbar' 
@@ -98,7 +98,33 @@ const CategoryChart = ({complaints}) => {
 
                     </div>
 
-                  </div>
+                  </div> */}
+                  <div
+  className="progress"
+  style={{
+    backgroundColor: "rgba(255,255,255,0.05)",
+    height: "8px",
+    overflow: "hidden",
+  }}
+>
+  <div
+    className="progress-bar animated-progress"
+    role="progressbar"
+    style={{
+       "--target-width": barWidth,
+    background: `linear-gradient(90deg,
+        ${color},
+        ${color}dd,
+        #ffffff,
+        ${color})`
+    }}
+    aria-valuenow={count}
+    aria-valuemin="0"
+    aria-valuemax={maxCount}
+  >
+    <span className="sparkle"></span>
+  </div>
+</div>
 
                 </div>
               )
