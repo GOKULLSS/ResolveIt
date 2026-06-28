@@ -80,7 +80,7 @@ const Home = () => {
                 <span className="text-secondary small fw-medium">Response Time</span>
               </div>
               <div className="col-6 col-lg-3 border-end border-white border-opacity-10 border-end-sm-none">
-                <h3 className="fw-bold text-light mb-1">1,200+</h3>
+                <h3 className="fw-bold text-light mb-1">30+</h3>
                 <span className="text-secondary small fw-medium">Issues Solved</span>
               </div>
               <div className="col-6 col-lg-3">
