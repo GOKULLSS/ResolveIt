@@ -181,7 +181,7 @@ const StudentTrackComplaints = () => {
         </div>
       ) : (
         <div className="row fade-in-up">
-          <div className="col-12 col-lg-9">
+          <div className="col-12">
             {filteredComplaints.map((c) => {
               const iconClass = categoryIcons[c.category] || 'bi-question-circle-fill';
               

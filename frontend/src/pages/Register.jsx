@@ -169,7 +169,7 @@ const Register = () => {
             {/*submit button*/}
             <button
               type="submit"
-              className="btn btn-primary-gradient w-100 py-3 d-flex justify-content-center align-items-center gap-2 fw-semibold mb-4"
+              className="btn btn-primary w-100 py-3 d-flex justify-content-center align-items-center gap-2 fw-semibold mb-4"
               disabled={isLoading}
             >
               {isLoading ? (

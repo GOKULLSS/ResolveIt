@@ -125,7 +125,7 @@ const Navbar = () => {
                 </Link>
                 <Link
                   to="/register"
-                  className="btn btn-primary-gradient btn-sm px-3 py-2"
+                  className="btn btn-primary btn-sm px-3 py-2"
                 >
                   Register
                 </Link>
