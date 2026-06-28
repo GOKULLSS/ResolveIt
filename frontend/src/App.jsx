@@ -18,6 +18,7 @@ import AdminActiveComplaints from "./pages/AdminActiveComplaints";
 import { useContext } from "react";
 import AuthContext, { AuthProvider } from "./context/AuthContext";
 import Profile from "./pages/Profile";
+import Home from "./pages/Home";
 
 const NavigationRedirect = () => {
   const { user } = useContext(AuthContext);
@@ -46,6 +47,8 @@ function App() {
           <Navbar />
           <div className="position-relative" style={{ zIndex: 2 }}>
             <Routes>
+
+              <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               <Route path="/unauthorized" element={<Unauthorized />} />
@@ -127,7 +130,7 @@ function App() {
           >
             <div className="container">
               <span className="text-secondary">
-                &copy; {new Date().getFullYear()} Campus Complaint Management
+                &copy; {new Date().getFullYear()} ResolveIt
                 System. All rights reserved.
               </span>
             </div>
