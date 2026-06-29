@@ -113,7 +113,7 @@ const StudentSubmit = () => {
       <div className="col-12 col-md-10 col-lg-8 fade-in-up">
         {/* Breadcrumbs */}
         <div className="mb-4">
-          <Link to="/view-complaints" className="text-secondary text-decoration-none small d-inline-flex align-items-center gap-1 hover-underline">
+          <Link to="/view-complaints" className="text-white text-decoration-none small d-inline-flex align-items-center gap-1 hover-underline">
             <i className="bi bi-chevron-left"></i>
             <span>Back to Complaints</span>
           </Link>
@@ -157,7 +157,6 @@ const StudentSubmit = () => {
                     type="text"
                     className="form-control custom-input"
                     id="title"
-                    placeholder="Brief summary of the issue"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                     disabled={loading}
@@ -191,7 +190,6 @@ const StudentSubmit = () => {
                   type="text"
                   className="form-control custom-input"
                   id="location"
-                  placeholder="e.g., Block A, 2nd floor, Room 204"
                   value={location}
                   onChange={(e) => setLocation(e.target.value)}
                   disabled={loading}
@@ -206,7 +204,6 @@ const StudentSubmit = () => {
                   className="form-control custom-input" // FIX: corrected 'form-contro' typo
                   id="description"
                   rows="6"
-                  placeholder="Elaborate on the issue, how long it has been occurring, and any other relevant context..."
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                   disabled={loading}
