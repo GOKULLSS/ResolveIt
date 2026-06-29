@@ -90,22 +90,15 @@ const Navbar = () => {
               <div className="d-flex align-items-center gap-3">
                 <div className="d-none d-md-block text-end">
                   <div className="text-light fw-medium small">{user.name}</div>
-                  <span
-                    className={`badge rounded-pill  'bg-danger bg-opacity-25 text-danger border border-danger border-opacity-50' px-2 py-1`}
-                    style={{ fontSize: "0.65rem" }}
-                  >
-                    {user.role}
-                    student
-                  </span>
                 </div>
                 <Link
                   to="/profile"
-                  className="btn btn-outline-light btn-sm d-flex align-items-center gap-2 px-3 py-2"
+                  className="btn  btn-sm d-flex align-items-center gap-2 px-3 py-2 text-white shine"
                   style={{
                     borderRadius: "8px",
                     transition: "all 0.2s",
                     border: "1px solid rgba(255, 255, 255, 0.15)",
-                    background: "rgba(255, 255, 255, 0.05)",
+                    background: "rgba(212, 191, 191, 0.05)",
                   }}
                 >
                   <i className="bi bi-person-circle"></i>
