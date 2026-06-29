@@ -93,7 +93,7 @@ const Navbar = () => {
                 </div>
                 <Link
                   to="/profile"
-                  className="btn  btn-sm d-flex align-items-center gap-2 px-3 py-2 text-white"
+                  className="btn  btn-sm d-flex align-items-center gap-2 px-3 py-2 text-white shine"
                   style={{
                     borderRadius: "8px",
                     transition: "all 0.2s",

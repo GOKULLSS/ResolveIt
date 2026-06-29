@@ -86,7 +86,7 @@ const Register = () => {
           <form onSubmit={handleSubmit}>
             <div className="row">
               {/*setting name*/}
-              <div className="col-md-6 mb-3">
+              <div className=" mb-3">
                 <label
                   htmlFor="nameInput"
                   className="form-label text-secondary small fw-medium"
@@ -114,38 +114,6 @@ const Register = () => {
                   />
                 </div>
               </div>
-
-              {/*setting role*/}
-              <div className="col-md-6 mb-3">
-                <label
-                  htmlFor="roleSelect"
-                  className="form-label text-secondary small fw-medium"
-                >
-                  Portal Role
-                </label>
-                <div className="input-group">
-                  <span
-                    className="input-group-text bg-transparent border-end-0 border-opacity-10"
-                    style={{
-                      borderColor: "var(--border-color)",
-                      color: "var(--text-secondary)",
-                    }}
-                  >
-                    <i className="bi bi-people"></i>
-                  </span>
-                  <select
-                    className="form-select custom-input border-start-0"
-                    id="roleSelect"
-                    value={role}
-                    onChange={(e) => setRole(e.target.value)}
-                    disabled={isLoading}
-                    required
-                  >
-                    <option value="Student">Student</option>
-                    <option value="Admin">Admin</option>
-                  </select>
-                </div>
-              </div>
             </div>
 
             {/*setting email*/}
@@ -154,7 +122,7 @@ const Register = () => {
                 htmlFor="emailInput"
                 className="form-label text-secondary small fw-medium"
               >
-                Campus Email Address
+               Email Address
               </label>
               <div className="input-group">
                 <span

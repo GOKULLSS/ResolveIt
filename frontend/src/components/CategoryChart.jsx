@@ -43,7 +43,7 @@ const CategoryChart = ({ complaints }) => {
   const totalComplaints = complaints.length;
   const maxCount = Math.max(...Object.values(counts), 1);
   return (
-    <div className="card glass-panel">
+    <div className="card glass-panel ani">
       <div className="card-body p-4">
         <h5 className="card-title fw-bold mb-4 d-flex align-items-center text-white">
           <i className="bi bi-bar-chart mx-2 text-primary"></i>
