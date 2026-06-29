@@ -452,3 +452,33 @@ footer,
     }
 
 }
+
+.navbar-logo {
+    width: 42px;
+    height: 42px;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.navbar-brand:hover .navbar-logo {
+    transform: scale(1.08);
+}
+
+.brand-text {
+    font-family: "Poppins", sans-serif;
+    letter-spacing: 0.5px;
+}
+
+.brand-resolve {
+    background: linear-gradient(90deg, #1565C0, #2196F3);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.brand-it {
+    background: linear-gradient(90deg, #66BB6A, #00C853);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
