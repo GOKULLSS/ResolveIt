@@ -2,8 +2,7 @@ import { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
 
  // Set default Axios configurations
-axios.defaults.baseURL = import.meta.env.VITE_API_URL || 'http://localhost:5000'; 
-
+axios.defaults.baseURL = import.meta.env.VITE_API_URL || (import.meta.env.PROD ? 'https://resolveit-ygvi.onrender.com' : 'http://localhost:5000');
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
