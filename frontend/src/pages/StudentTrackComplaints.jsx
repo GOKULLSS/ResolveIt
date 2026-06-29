@@ -15,7 +15,7 @@ const categories = [
 ];
 
 const categoryIcons = {
-  'Classroom': 'bi-chalkboard-fill',
+  'Classroom': 'bi-buildings-fill',
   'Laboratory': 'bi-cpu-fill',
   'Hostel': 'bi-houses-fill',
   'Library': 'bi-book-half',

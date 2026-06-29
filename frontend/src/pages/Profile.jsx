@@ -226,7 +226,9 @@ const Profile = () => {
                     </>
                   ) : (
                     <>
-                      <i className="bi bi-check-lg me-2"></i>Save Changes
+                      
+                      <div className='text-white'><i className="bi bi-check-lg me-2 "></i>
+                      Save Changes</div>
                     </>
                   )}
                 </button>
