@@ -2,12 +2,23 @@ import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 import logo from "../assets/logo.png";
+import Collapse from "bootstrap/js/dist/collapse";
+
+const closeNavbar = () => {
+  const navbar = document.getElementById("navbarNav");
+
+  if (navbar && navbar.classList.contains("show")) {
+    const bsCollapse = Collapse.getOrCreateInstance(navbar);
+    bsCollapse.hide();
+  }
+};
 const Navbar = () => {
   const { user, logout } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
   const handleLogout = () => {
+    closeNavbar();
     logout();
     navigate("/login");
   };
@@ -47,22 +58,22 @@ const Navbar = () => {
             {user && user.role === "Student" && (
               <>
                 <li className="nav-item">
-                  <Link className="nav-link px-3" to="/student-dashboard">
+                  <Link className="nav-link px-3" to="/student-dashboard" onClick={closeNavbar}>
                     <i className="bi bi-speedometer2 me-1"></i> Dashboard
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link px-3" to="/submit-complaint">
+                  <Link className="nav-link px-3" to="/submit-complaint" onClick={closeNavbar}>
                     <i className="bi bi-plus-circle me-1"></i> File Complaint
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link px-3" to="/view-complaints">
+                  <Link className="nav-link px-3" to="/view-complaints" onClick={closeNavbar}>
                     <i className="bi bi-journal-text me-1"></i> View Complaint
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link px-3" to="/complaint-status">
+                  <Link className="nav-link px-3" to="/complaint-status" onClick={closeNavbar}>
                     <i className="bi bi-activity me-1"></i> Complaint Status
                   </Link>
                 </li>
@@ -72,12 +83,12 @@ const Navbar = () => {
             {user && user.role === "Admin" && (
               <>
                 <li className="nav-item ">
-                  <Link className=" nav-link" to="/admin-dashboard">
+                  <Link className=" nav-link" to="/admin-dashboard" onClick={closeNavbar}>
                     <i className="bi bi-grid-1x2-fill me-1"></i> Admin Dashboard
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link px-3" to="/active-complaints">
+                  <Link className="nav-link px-3" to="/active-complaints" onClick={closeNavbar}>
                     <i className="bi bi-journal-text me-1"></i> Active
                     Complaints
                   </Link>
@@ -100,6 +111,7 @@ const Navbar = () => {
                     border: "1px solid rgba(255, 255, 255, 0.15)",
                     background: "rgba(212, 191, 191, 0.05)",
                   }}
+                  onClick={closeNavbar}
                 >
                   <i className="bi bi-person-circle"></i>
                   <span>Profile</span>
@@ -119,12 +131,14 @@ const Navbar = () => {
                   to="/login"
                   className="btn btn-outline-light btn-sm px-3 py-2"
                   style={{ borderRadius: "8px" }}
+                  onClick={closeNavbar}
                 >
                   Sign In
                 </Link>
                 <Link
                   to="/register"
                   className="btn btn-primary btn-sm px-3 py-2"
+                  onClick={closeNavbar}
                 >
                   Register
                 </Link>
